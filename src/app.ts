@@ -60,6 +60,21 @@ class Catagotchi {
     }
   }
 
+  private updateDisplays() {
+    this.clearScreen();
+    this.writeTextToCanvas(`Energy: ${this.cat.getEnergy()}`, 100, 100);
+    this.writeTextToCanvas(`Hunger: ${this.cat.getHunger()}`, 300, 100);
+    this.writeTextToCanvas(`Mood: ${this.cat.getMood()}`, 500, 100);
+  }
+
+  /**
+   * Removes all painted things from the canvas. Starts at the top-left pixel
+   * of the canvas and stops at the bottom-right pixel.
+   */
+  private clearScreen() {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+  }
+
   /**
    * Writes text to the canvas
    *
@@ -133,6 +148,6 @@ class Catagotchi {
  *
  * @returns nothing
  */
-const init = () => new Catagotchi(document.querySelector('#game'));
+const init = () => new Catagotchi(document.querySelector('#canvas'));
 
 window.addEventListener('load', init);
