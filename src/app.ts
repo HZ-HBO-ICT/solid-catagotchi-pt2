@@ -2,11 +2,13 @@ import Cat from './Cat.js';
 import KeyListener from './KeyListener.js';
 
 class Catagotchi {
+  private readonly canvas: HTMLCanvasElement;
+
+  private readonly ctx: CanvasRenderingContext2D;
+
   private cat: Cat;
 
   private keyListener: KeyListener;
-
-  private gameDOM : Element;
 
   private displayMood : HTMLDivElement;
 
@@ -24,10 +26,14 @@ class Catagotchi {
    * Once set, the DOM elements will be gathered and updated.
    * Finally, the cat will meow to indicate that it is indeed alive!
    *
-   * @param gameDOM pass the DOM element where the game will run.
+   * @param canvas pass the canvas element where the game will run.
    */
-  constructor(gameDOM : Element) {
-    this.gameDOM = gameDOM;
+  constructor(canvas : HTMLCanvasElement) {
+    this.canvas = canvas;
+    this.ctx = this.canvas.getContext('2d');
+
+    this.canvas.width = window.innerWidth;
+    this.canvas.height = window.innerHeight;
 
     this.cat = new Cat();
     this.keyListener = new KeyListener();
