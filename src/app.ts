@@ -6,6 +6,8 @@ class Catagotchi {
 
   private readonly ctx: CanvasRenderingContext2D;
 
+  private background: HTMLImageElement;
+
   private cat: Cat;
 
   private keyListener: KeyListener;
@@ -26,6 +28,8 @@ class Catagotchi {
 
     this.canvas.width = window.innerWidth;
     this.canvas.height = window.innerHeight;
+
+    this.background = this.loadNewImage('img/HAPPY CAT.png');
 
     this.cat = new Cat();
     this.keyListener = new KeyListener();
@@ -62,6 +66,16 @@ class Catagotchi {
 
   private updateDisplays() {
     this.clearScreen();
+
+    // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage
+    this.ctx.drawImage(
+      this.background,
+      100,
+      100,
+      this.background.width,
+      this.canvas.height / 2,
+    );
+
     this.writeTextToCanvas(`Energy: ${this.cat.getEnergy()}`, 100, 100);
     this.writeTextToCanvas(`Hunger: ${this.cat.getHunger()}`, 300, 100);
     this.writeTextToCanvas(`Mood: ${this.cat.getMood()}`, 500, 100);
