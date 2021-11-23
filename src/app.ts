@@ -34,9 +34,7 @@ class Catagotchi {
   }
 
   /**
-   * Called for every game tick. Updates attributes.
-   * TODO: currently called from outside the current class. Make the game tick internal?
-   * TODO: move the update of attributes to its own function.
+   * Called for every game tick. Updates attributes and the canvas.
    */
   public gameTick() {
     if (this.cat.isAlive()) {
@@ -60,6 +58,43 @@ class Catagotchi {
     if (this.keyListener.isKeyDown(KeyListener.KEY_S)) {
       this.cat.sleep();
     }
+  }
+
+  /**
+   * Writes text to the canvas
+   *
+   * @param text - Text to write
+   * @param xCoordinate - Horizontal coordinate in pixels
+   * @param yCoordinate - Vertical coordinate in pixels
+   * @param fontSize - Font size in pixels
+   * @param color - The color of the text
+   * @param alignment - Where to align the text
+   */
+  private writeTextToCanvas(
+    text: string,
+    xCoordinate: number,
+    yCoordinate: number,
+    fontSize = 20,
+    color = 'red',
+    alignment: CanvasTextAlign = 'center',
+  ) {
+    this.ctx.font = `${fontSize}px sans-serif`;
+    this.ctx.fillStyle = color;
+    this.ctx.textAlign = alignment;
+    this.ctx.fillText(text, xCoordinate, yCoordinate);
+  }
+
+  /**
+   * Loads an image in such a way that the screen doesn't constantly flicker
+   *
+   * @param source Path to the image file to be loaded
+   * @returns An image element
+   */
+  // eslint-disable-next-line class-methods-use-this
+  private loadNewImage(source: string): HTMLImageElement {
+    const img = new Image();
+    img.src = source;
+    return img;
   }
 
   /**
