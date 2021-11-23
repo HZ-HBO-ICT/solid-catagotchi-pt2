@@ -10,14 +10,6 @@ class Catagotchi {
 
   private keyListener: KeyListener;
 
-  private displayMood : HTMLDivElement;
-
-  private displayEnergy : HTMLDivElement;
-
-  private displayHunger : HTMLDivElement;
-
-  private displayStatus : HTMLDivElement;
-
   private lastTickTimeStamp : number;
 
   /**
@@ -38,19 +30,7 @@ class Catagotchi {
     this.cat = new Cat();
     this.keyListener = new KeyListener();
 
-    this.getDOMElements();
-    this.updateDisplays();
     this.startRunning();
-  }
-
-  /**
-   * Update the displays on the DOM with current state of attributes.
-   */
-  private updateDisplays() {
-    this.displayMood.innerHTML = String(this.cat.getMood());
-    this.displayHunger.innerHTML = String(this.cat.getHunger());
-    this.displayEnergy.innerHTML = String(this.cat.getEnergy());
-    this.displayStatus.innerHTML = (this.cat.isAlive() ? 'Alive' : 'Dead');
   }
 
   /**
@@ -80,13 +60,6 @@ class Catagotchi {
     if (this.keyListener.isKeyDown(KeyListener.KEY_S)) {
       this.cat.sleep();
     }
-  }
-
-  private getDOMElements() {
-    this.displayHunger = this.gameDOM.querySelector('#displayHunger');
-    this.displayMood = this.gameDOM.querySelector('#displayMood');
-    this.displayEnergy = this.gameDOM.querySelector('#displayEnergy');
-    this.displayStatus = this.gameDOM.querySelector('#displayStatus');
   }
 
   /**
